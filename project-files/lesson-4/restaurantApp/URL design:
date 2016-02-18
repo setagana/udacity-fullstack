@@ -1,0 +1,10 @@
+URL design:
+
+/ && /restaurants = Home page / restaurant list
+/restaurants/restaurant_id/menu = Restaurant menu
+restaurants/add = Create new restaurant
+restaurants/restaurant_id/edit = Edit restaurant details
+restaurants/restaurant_id/delete = Delete a restaurant
+restaurants/restaurant_id/menu/add = Create new menu item
+restaurants/restaurant_id/menu/menu_id/edit = Edit existing menu item
+restaurants/restaurant_id/menu/menu_id/delete - Delete a menu item

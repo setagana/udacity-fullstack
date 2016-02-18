@@ -1,0 +1,1 @@
+sixMonthPuppiesTwo = session.query(Puppy).order_by(desc(Puppy.date_of_birth)).filter(Puppy.date_of_birth.between(datetime.date.today() + relativedelta(months=-6), datetime.date.today()))

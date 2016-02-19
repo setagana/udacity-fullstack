@@ -1,7 +1,7 @@
 from restaurantApp import app
 from flask import render_template, url_for, request, redirect, flash, jsonify
 
-import restaurantApp.forms
+from restaurantApp.forms import restaurantForm
 
 # from sqlalchemy import create_engine
 # from sqlalchemy.orm import sessionmaker

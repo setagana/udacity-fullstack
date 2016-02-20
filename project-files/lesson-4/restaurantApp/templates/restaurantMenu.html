@@ -1,9 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>restaurant.name - menu</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='foundation.min.css' )}}" />
 </head>
 <body>
-	<h1>Placeholder restaurantMenu.html file</h1>
+	<div class="row">
+		<div class="small-12 columns">
+			<ul class="tabs" data-tabs id="course-tabs">
+				{% for course in courseList %}
+					<li class="tabs-title"><a href="#panel{{ loop.index }}">{{ course }}</a></li>
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+	<div class="row">
+		<div class="small-12 columns">
+			<div class="tabs-content" data-tabs-content="course-tabs">
+				{% for course in courseList %}
+				<div class="tabs-panel" id="panel{{ loop.index }}">
+          			{% for item in menuItems[loop.index0] %}
+          			<p>{{ item }}</p>
+          			{% endfor %}
+        		</div>
+				{% endfor %}
+			</div>	
+		</div>
+	</div>
+	<div class="row">
+		<div class="small-12 columns">
+			<a class="expanded button" href="{{ url_for('newMenuItem', restaurant_id=1) }}">Add to the menu</a>
+		</div>
+	</div>
+
+	<script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='what-input.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='foundation.min.js') }}"></script>
+	<script>
+		$(document).foundation();
+		tabs.selectTab("panel1");
+	</script>
 </body>
 </html>

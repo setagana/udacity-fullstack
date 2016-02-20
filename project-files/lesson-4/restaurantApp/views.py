@@ -29,7 +29,9 @@ def restaurantMenu(restaurant_id):
 	#Get courses from database by restaurant and store as "courses"
 	#Get menu items by restaurant and by course and store as "[coursename]Items"
 	# return render_template("restaurantMenu.html", restaurant=restaurant)
-	return render_template("restaurantMenu.html")
+	courseList = ["Snacks","Starters","Mains","Sides","Desserts","Aperitifs"]
+	menuItems = [["Gruyere and white truffle maccarons","Crispy chicken skins"],["Pennette Formaggi","Calamari","Risotto Mio","Garlic Bread with Mozarella"],["Calzone Diavolo","Pennette Formaggi","Nicoise Salad","Pennette Bolognese"],["Coleslaw","Broccolini","Mixed Salad","Potato Nocciola"],["Treacle tart cheesecake","Vanilla cheesecake","Honeycomb Cream Slice"],["Coffee","Tea","Whiskey","Brandy"]]
+	return render_template("restaurantMenu.html", courseList=courseList, menuItems=menuItems)
 
 @app.route("/restaurants/add", methods=["GET","POST"])
 def newRestaurant():

@@ -15,13 +15,21 @@
 		<div class="small-12 columns">
 			<form action="{{ url_for('newRestaurant') }}" method="POST">
 				<dl>
-					{{ render_field(form.address) }}
-					{{ render_field(form.city) }}
-					{{ render_field(form.postCode) }}
-					{{ render_field(form.phone) }}
-					{{ render_field(form.website) }}
+					{{ render_field(form.address, placeholder="1 Wall Street") }}
+					{{ render_field(form.city, placeholder="New York") }}
+					{{ render_field(form.postCode, placeholder="10005") }}
+					{{ render_field(form.phone, placeholder="+1-555-123-4567") }}
+					{{ render_field(form.website, placeholder="www.fantastic-eats.com") }}
   				</dl>
 			</form>
+		</div>
+	</div>
+	<div class="row">
+		<div class="small-12 columns">
+			<div class="button-group float-right">
+				<input type="submit" class="success button" value="Add">
+				<a class="secondary button" href="#">Cancel</a>
+			</div>
 		</div>
 	</div>
 

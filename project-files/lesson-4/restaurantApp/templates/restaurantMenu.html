@@ -5,6 +5,7 @@
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='foundation.min.css' )}}" />
 </head>
 <body>
+	{% if courseList|length > 0 %}
 	<div class="row">
 		<div class="small-12 columns">
 			<ul class="tabs" data-tabs id="course-tabs">
@@ -27,6 +28,16 @@
 			</div>	
 		</div>
 	</div>
+	{% else %}
+	<div class="row">
+		<div class="small-12 columns">
+			<div class="callout">
+				<h5>There doesn't seem to be anything here.</h5>
+				<p>Try adding some menu items with the button below.</p>
+			</div>
+		</div>
+	</div>
+	{% endif %}
 	<div class="row">
 		<div class="small-12 columns">
 			<a class="expanded button" href="{{ url_for('newMenuItem', restaurant_id=1) }}">Add to the menu</a>
@@ -38,7 +49,11 @@
 	<script src="{{ url_for('static', filename='foundation.min.js') }}"></script>
 	<script>
 		$(document).foundation();
-		tabs.selectTab("panel1");
 	</script>
+	{% if courseList|length > 0 %}
+	<script>
+		$("#course-tabs").foundation("selectTab","panel1");
+	</script>
+	{% endif %}
 </body>
 </html>

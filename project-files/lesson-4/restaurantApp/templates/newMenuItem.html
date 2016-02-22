@@ -1,9 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>Add a new menu item</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='foundation.min.css' )}}" />
+	{% from "__formhelper.html" import render_field %}
 </head>
 <body>
-	<h1>Placeholder newMenuItem.html file</h1>
+	<div class="row">
+		<div class="small-12 columns">
+			<h1>Add an item to the menu of restaurant.name</h1>
+		</div>
+	</div>
+	<div class="row">
+		<div class="small-12 columns">
+			<form action="{{ url_for('newMenuItem', restaurant_id=restaurant_id ) }}" method="POST">
+				<dl>
+					{{ render_field(form.dishName, placeholder="Baked Alaska") }}
+					{{ render_field(form.dishDescription, placeholder="Ice cream and cake topped with a toasted meringue") }}
+					{{ render_field(form.course, placeholder="Dessert") }}
+					{{ render_field(form.price, placeholder="$8.99") }}
+  				</dl>
+			</form>
+		</div>
+	</div>
+	<div class="row">
+		<div class="small-12 columns">
+			<div class="button-group float-right">
+				<input type="submit" class="success button" value="Add">
+				<a class="secondary button" href="#">Cancel</a>
+			</div>
+		</div>
+	</div>
+
 </body>
 </html>

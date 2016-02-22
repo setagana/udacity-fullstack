@@ -2,6 +2,7 @@ from restaurantApp import app
 from flask import render_template, url_for, request, redirect, flash, jsonify
 
 from restaurantApp.forms import restaurantForm
+from restaurantApp.forms import menuItemForm
 
 # from sqlalchemy import create_engine
 # from sqlalchemy.orm import sessionmaker
@@ -64,14 +65,15 @@ def deleteRestaurant(restaurant_id):
 		# return render_template("deleteRestaurant.html", restaurant=restaurantToDelete)
 		return render_template("deleteRestaurant.html")
 
-@app.route("/restaurants/<int:restaurant_id>/menu/add/", methods=["GET", "POST"])
+@app.route("/restaurants/<int:restaurant_id>/menu/add/", methods=["GET","POST"])
 def newMenuItem(restaurant_id):
-	if request.method == "POST":
+	form = menuItemForm()
+	if form.validate_on_submit():
 		#Create new menu item with data from form
+		#Flash message
 		return redirect(url_for("restaurantMenu", restaurant_id=restaurant_id))
 	else:
-		# return render_template("newMenuItem.html", restaurant_id=restaurant_id)
-		return render_template("newMenuItem.html")
+		return render_template("newMenuItem.html", restaurant_id=restaurant_id, form=form)
 
 @app.route("/restaurants/<int:restaurant_id>/menu/<int:menu_id>/edit/", methods=["GET", "POST"])
 def editMenuItem(restaurant_id, menu_id):

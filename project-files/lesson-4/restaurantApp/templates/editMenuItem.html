@@ -17,7 +17,8 @@
 				<dl>
 					{{ render_field(form.dishName, value="menuItem.dishName") }}
 					{{ render_field(form.dishDescription, value="menuItem.dishDescription") }}
-					{{ render_field(form.course, value="menuItem.course") }}
+					{{ render_field(form.course, aria_describedby="courseHelpText", value="menuItem.course") }}
+					<p class="help-text" id="courseHelpText">This restaurant's menu currently has these courses: {{ courseList|join(", ") }}.</p>
 					{{ render_field(form.price, value="menuItem.price") }}
   				</dl>
 			</form>

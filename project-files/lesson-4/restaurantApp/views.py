@@ -47,13 +47,14 @@ def newRestaurant():
 @app.route("/restaurants/<int:restaurant_id>/edit/", methods=["GET","POST"])
 def editRestaurant(restaurant_id):
 	#Get restaurant from DB and store as "restaurant"
-	if request.method == "POST":
+	form = restaurantForm()
+	if form.validate_on_submit():
 		# Commit changes to DB
 		# flash message
 		return redirect(url_for("restaurantList"))
 	else:
 		# return render_template("editRestaurant.html", restaurant=restaurant)
-		return render_template("editRestaurant.html")
+		return render_template("editRestaurant.html", form=form)
 
 @app.route("/restaurants/<int:restaurant_id>/delete/", methods=["GET","POST"])
 def deleteRestaurant(restaurant_id):
@@ -86,7 +87,8 @@ def editMenuItem(restaurant_id, menu_id):
 		return redirect(url_for("restaurantMenu", restaurant_id=restaurant_id))
 	else:
 		# return render_template("editMenuItem.html", restaurant_id=restaurant_id, menu_id=menu_id, i=menuItem)
-		return render_template("editMenuItem.html", restaurant_id=restaurant_id, menu_id=menu_id, form=form)
+		courseList = ["Snacks","Starters","Mains","Sides","Desserts","Aperitifs"]
+		return render_template("editMenuItem.html", restaurant_id=restaurant_id, menu_id=menu_id, form=form, courseList=courseList)
 
 # Task 3: Create a route for deleteMenuItem function here
 

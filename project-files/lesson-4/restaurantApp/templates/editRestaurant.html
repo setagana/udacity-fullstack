@@ -1,9 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>Edit restaurant.name</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='foundation.min.css' )}}" />
+	{% from "__formhelper.html" import render_field %}
 </head>
 <body>
-	<h1>Placeholder editRestaurant.html file</h1>
+	<div class="row">
+		<div class="small-12 columns">
+			<h1>Change the details for restaurant.name</h1>
+		</div>
+	</div>
+	<div class="row">
+		<div class="small-12 columns">
+			<form action="{{ url_for('newRestaurant') }}" method="POST">
+				<dl>
+					{{ render_field(form.name, value="restaurant.name") }}
+					{{ render_field(form.address, value="restaurant.address") }}
+					{{ render_field(form.city, value="restaurant.city") }}
+					{{ render_field(form.postCode, value="restaurant.postCode") }}
+					{{ render_field(form.phone, value="restaurant.phone") }}
+					{{ render_field(form.website, value="restaurant.website") }}
+  				</dl>
+			</form>
+		</div>
+	</div>
+	<div class="row">
+		<div class="small-12 columns">
+			<div class="button-group float-right">
+				<input type="submit" class="success button" value="Add">
+				<a class="secondary button" href="{{ url_for('restaurantList') }}">Cancel</a>
+			</div>
+		</div>
+	</div>
+
 </body>
 </html>

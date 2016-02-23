@@ -73,31 +73,33 @@ def newMenuItem(restaurant_id):
 		#Flash message
 		return redirect(url_for("restaurantMenu", restaurant_id=restaurant_id))
 	else:
-		return render_template("newMenuItem.html", restaurant_id=restaurant_id, form=form)
+		courseList = ["Snacks","Starters","Mains","Sides","Desserts","Aperitifs"]
+		return render_template("newMenuItem.html", restaurant_id=restaurant_id, form=form, courseList=courseList)
 
 @app.route("/restaurants/<int:restaurant_id>/menu/<int:menu_id>/edit/", methods=["GET", "POST"])
 def editMenuItem(restaurant_id, menu_id):
-	menuItem = session.query(MenuItem).filter_by(id = menu_id).one()
-	if request.method == "POST":
+	# menuItem = session.query(MenuItem).filter_by(id = menu_id).one()
+	form = menuItemForm()
+	if form.validate_on_submit():
 		# Commit menu item changes to DB
 		# Flash message	
 		return redirect(url_for("restaurantMenu", restaurant_id=restaurant_id))
 	else:
 		# return render_template("editMenuItem.html", restaurant_id=restaurant_id, menu_id=menu_id, i=menuItem)
-		return render_template("editMenuItem.html")
+		return render_template("editMenuItem.html", restaurant_id=restaurant_id, menu_id=menu_id, form=form)
 
 # Task 3: Create a route for deleteMenuItem function here
 
 @app.route("/restaurants/<int:restaurant_id>/menu/<int:menu_id>/delete/", methods=["GET", "POST"])
 def deleteMenuItem(restaurant_id, menu_id):
-	deletedItem = session.query(MenuItem).filter_by(id = menu_id).one()
+	# deletedItem = session.query(MenuItem).filter_by(id = menu_id).one()
 	if request.method == "POST":
 		# Commit menu item deletion to DB
 		# Flash messages
 		return redirect(url_for("restaurantMenu", restaurant_id=restaurant_id))
 	else:
 		# return render_template("deleteMenuItem.html", restaurant_id=restaurant_id, menu_id=menu_id, item=deletedItem)
-		return render_template("deleteMenuItem.html")
+		return render_template("deleteMenuItem.html", restaurant_id=restaurant_id)
 
 # #Making an API Endpoint (GET request)
 # @app.route("/restaurants/<int:restaurant_id>/menu/JSON")

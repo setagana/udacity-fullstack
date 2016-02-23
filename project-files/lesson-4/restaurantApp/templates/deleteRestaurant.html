@@ -1,9 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>Remove restaurant.name</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='foundation.min.css' )}}" />
 </head>
 <body>
-	<h1>Placeholder deleteRestaurant.html file</h1>
+	<div class="row">
+		<div class="small-12 columns">
+			<h5>Are you sure you want to delete restaurant.name?</h5>
+		</div>
+	</div>
+	<div class="row">
+		<div class="small-12 columns">
+			<p>Click below to remove restaurant.name and all associated data from our database.</p>
+		</div>
+	</div>
+	<form action="{{ url_for('restaurantList') }}" method="POST">
+		<div class="row">
+			<div class="small-12 columns">
+				<div class="button-group float-right">
+					<input type="submit" class="alert button" value="Delete">
+					<a class="secondary button" href="{{ url_for('restaurantList') }}">Cancel</a>
+				</div>
+			</div>
+		</div>
+	</form>
 </body>
 </html>

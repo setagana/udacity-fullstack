@@ -87,8 +87,12 @@ def editMenuItem(restaurant_id, menu_id):
 		return redirect(url_for("restaurantMenu", restaurant_id=restaurant_id))
 	else:
 		# return render_template("editMenuItem.html", restaurant_id=restaurant_id, menu_id=menu_id, i=menuItem)
+<<<<<<< HEAD
 		courseList = ["Snacks","Starters","Mains","Sides","Desserts","Aperitifs"]
 		return render_template("editMenuItem.html", restaurant_id=restaurant_id, menu_id=menu_id, form=form, courseList=courseList)
+=======
+		return render_template("editMenuItem.html", restaurant_id=restaurant_id, menu_id=menu_id, form=form)
+>>>>>>> f440725c58ddd1a6dab76aa7780abb7964525e83
 
 # Task 3: Create a route for deleteMenuItem function here
 

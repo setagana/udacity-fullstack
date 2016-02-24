@@ -17,8 +17,12 @@
 				<dl>
 					{{ render_field(form.dishName, placeholder="Baked Alaska") }}
 					{{ render_field(form.dishDescription, placeholder="Ice cream and cake topped with a toasted meringue") }}
+					{% if courseList %}
 					{{ render_field(form.course, aria_describedby="courseHelpText", placeholder="Dessert") }}
 					<p class="help-text" id="courseHelpText">This restaurant's menu currently has these courses: {{ courseList|join(", ") }}.</p>
+					{% else %}
+					{{ render_field(form.course, placeholder="Dessert") }}
+					{% endif %}
 					{{ render_field(form.price, placeholder="8.99") }}
   				</dl>
 			</form>

@@ -17,12 +17,12 @@
 				<dl>
 					{{ render_field(form.dishName, value="menuItem.dishName") }}
 					{{ render_field(form.dishDescription, value="menuItem.dishDescription") }}
-<<<<<<< HEAD
+					{% if courseList %}
 					{{ render_field(form.course, aria_describedby="courseHelpText", value="menuItem.course") }}
 					<p class="help-text" id="courseHelpText">This restaurant's menu currently has these courses: {{ courseList|join(", ") }}.</p>
-=======
+					{% else %}
 					{{ render_field(form.course, value="menuItem.course") }}
->>>>>>> f440725c58ddd1a6dab76aa7780abb7964525e83
+					{% endif %}
 					{{ render_field(form.price, value="menuItem.price") }}
   				</dl>
 			</form>

@@ -4,18 +4,21 @@ from flask import render_template, url_for, request, redirect, flash, jsonify
 from restaurantApp.forms import restaurantForm
 from restaurantApp.forms import menuItemForm
 
-# from sqlalchemy import create_engine
-# from sqlalchemy.orm import sessionmaker
+from restaurantApp.database_setup import *
+
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+
+engine = create_engine("sqlite:///restaurantApp/app.db")
+
+Base.metadata.bind = engine
  
-# from database_setup import *
+DBSession = sessionmaker(bind=engine)
 
-# engine = create_engine("sqlite:///restaurantmenu.db")
+session = DBSession()
 
-# Base.metadata.bind = engine
- 
-# DBSession = sessionmaker(bind=engine)
-
-# session = DBSession()
+from decimal import *
+getcontext().prec = 2
 
 @app.route("/")
 @app.route("/restaurants/")
@@ -69,8 +72,11 @@ def deleteRestaurant(restaurant_id):
 @app.route("/restaurants/<int:restaurant_id>/menu/add/", methods=["GET","POST"])
 def newMenuItem(restaurant_id):
 	form = menuItemForm()
-	if form.validate_on_submit():
-		#Create new menu item with data from form
+	if request.method == "POST":
+		convertedPrice = int(Decimal(form.price.data) * 100)
+		newItem = MenuItem(name = form.dishName.data, course = form.course.data, description = form.dishDescription.data, price = convertedPrice, restaurant_id = restaurant_id)
+		session.add(newItem)
+		session.commit()
 		#Flash message
 		return redirect(url_for("restaurantMenu", restaurant_id=restaurant_id))
 	else:

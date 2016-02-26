@@ -11,9 +11,9 @@
 			<h1>Add an item to the menu of restaurant.name</h1>
 		</div>
 	</div>
-	<div class="row">
-		<div class="small-12 columns">
-			<form action="{{ url_for('newMenuItem', restaurant_id=restaurant_id) }}" method="POST">
+	<form action="{{ url_for('newMenuItem', restaurant_id=restaurant_id) }}" method="POST">
+		<div class="row">
+			<div class="small-12 columns">
 				<dl>
 					{{ render_field(form.dishName, placeholder="Baked Alaska") }}
 					{{ render_field(form.dishDescription, placeholder="Ice cream and cake topped with a toasted meringue") }}
@@ -25,17 +25,17 @@
 					{% endif %}
 					{{ render_field(form.price, placeholder="8.99") }}
   				</dl>
-			</form>
-		</div>
-	</div>
-	<div class="row">
-		<div class="small-12 columns">
-			<div class="button-group float-right">
-				<input type="submit" class="success button" value="Add">
-				<a class="secondary button" href="{{ url_for('restaurantMenu', restaurant_id=restaurant_id) }}">Cancel</a>
 			</div>
 		</div>
-	</div>
+		<div class="row">
+			<div class="small-12 columns">
+				<div class="button-group float-right">
+					<input type="submit" class="success button" value="Add">
+					<a class="secondary button" href="{{ url_for('restaurantMenu', restaurant_id=restaurant_id) }}">Cancel</a>
+				</div>
+			</div>
+		</div>
+	</form>
 
 </body>
 </html>

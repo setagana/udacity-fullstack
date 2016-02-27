@@ -1,16 +1,17 @@
 from flask_wtf import Form
-from wtforms import TextField, validators
+from wtforms import StringField
+from wtforms.validators import DataRequired, URL, Regexp
 
 class restaurantForm(Form):
-	name = TextField("Name", [validators.InputRequired()])
-	address = TextField("Address", [validators.InputRequired()])
-	city = TextField("City", [validators.InputRequired()])
-	postCode = TextField("ZIP/Post code", [validators.InputRequired()])
-	phone = TextField("Phone number", [validators.InputRequired()])
-	website = TextField("Website", [validators.URL()])
+	name = StringField("Name", validators=[DataRequired()])
+	address = StringField("Address", validators=[DataRequired()])
+	city = StringField("City", validators=[DataRequired()])
+	postCode = StringField("ZIP/Post code", validators=[DataRequired()])
+	phone = StringField("Phone number", validators=[DataRequired()])
+	website = StringField("Website", validators=[URL()])
 
 class menuItemForm(Form):
-	dishName = TextField("Dish name", [validators.InputRequired()])
-	dishDescription = TextField("Description")
-	course = TextField("Course",[validators.InputRequired()])
-	price = TextField("Price", [validators.InputRequired(), validators.Regexp("^(?!0+$)\d{0,5}(.\d{1,2})?$",message="That doesn't look like a valid number")])
+	dishName = StringField("Dish name", validators=[DataRequired()])
+	dishDescription = StringField("Description")
+	course = StringField("Course", validators=[DataRequired()])
+	price = StringField("Price", validators=[DataRequired(), Regexp("^(?!0+$)\d{0,5}(.\d{1,2})?$",message="That doesn't look like a valid number")])

@@ -1,38 +1,49 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Edit restaurant.name</title>
+	<title>Edit restaurant</title>
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='foundation.min.css' )}}" />
 	{% from "__formhelper.html" import render_field %}
 </head>
 <body>
 	<div class="row">
 		<div class="small-12 columns">
-			<h1>Change the details for restaurant.name</h1>
+			<h1>Change the details for <i>{{ restaurantToEdit.name }}</i></h1>
 		</div>
 	</div>
 	<div class="row">
 		<div class="small-12 columns">
-			<form action="{{ url_for('newRestaurant') }}" method="POST">
+			<nav aria-label="You are here:" role="navigation">
+				<ul class="breadcrumbs">
+					<li><a href="{{ url_for('restaurantList') }}">All restaurants</a></li>
+					<li class="disabled">Edit restaurant</li>
+				</ul>
+			</nav>		
+		</div>
+	</div>
+	<form action="{{ url_for('editRestaurant', restaurant_id=restaurantToEdit.id) }}" method="POST">
+		<div class="row">
+			<div class="small-12 columns">
 				<dl>
-					{{ render_field(form.name, value="restaurant.name") }}
-					{{ render_field(form.address, value="restaurant.address") }}
-					{{ render_field(form.city, value="restaurant.city") }}
-					{{ render_field(form.postCode, value="restaurant.postCode") }}
-					{{ render_field(form.phone, value="restaurant.phone") }}
-					{{ render_field(form.website, value="restaurant.website") }}
+					{{ form.hidden_tag() }}
+					{{ render_field(form.name, value=restaurantToEdit.name) }}
+					{{ render_field(form.address, value=restaurantToEdit.address) }}
+					{{ render_field(form.city, value=restaurantToEdit.city) }}
+					{{ render_field(form.postCode, value=restaurantToEdit.postcode) }}
+					{{ render_field(form.phone, value=restaurantToEdit.phone) }}
+					{{ render_field(form.website, value=restaurantToEdit.website) }}
   				</dl>
-			</form>
-		</div>
-	</div>
-	<div class="row">
-		<div class="small-12 columns">
-			<div class="button-group float-right">
-				<input type="submit" class="success button" value="Add">
-				<a class="secondary button" href="{{ url_for('restaurantList') }}">Cancel</a>
 			</div>
 		</div>
-	</div>
+		<div class="row">
+			<div class="small-12 columns">
+				<div class="button-group float-right">
+					<input type="submit" class="success button" value="Edit">
+					<a class="secondary button" href="{{ url_for('restaurantList') }}">Cancel</a>
+				</div>
+			</div>
+		</div>
+	</form>
 
 </body>
 </html>

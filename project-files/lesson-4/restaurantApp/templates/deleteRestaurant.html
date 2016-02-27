@@ -1,21 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Remove restaurant.name</title>
+	<title>Remove a restaurant</title>
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='foundation.min.css' )}}" />
 </head>
 <body>
 	<div class="row">
 		<div class="small-12 columns">
-			<h5>Are you sure you want to delete restaurant.name?</h5>
+			<h1>Remove a restaurant</h1>		
 		</div>
 	</div>
 	<div class="row">
 		<div class="small-12 columns">
-			<p>Click below to remove restaurant.name and all associated data from our database.</p>
+			<nav aria-label="You are here:" role="navigation">
+				<ul class="breadcrumbs">
+					<li><a href="{{ url_for('restaurantList') }}">All restaurants</a></li>
+					<li class="disabled">Delete restaurant</li>
+				</ul>
+			</nav>		
 		</div>
 	</div>
-	<form action="{{ url_for('restaurantList') }}" method="POST">
+	<div class="row">
+		<div class="small-12 columns">
+			<h5>Are you sure you want to delete <i>{{ restaurantToDelete.name }}</i>?</h5>
+		</div>
+	</div>
+	<div class="row">
+		<div class="small-12 columns">
+			<p>Click below to remove <i>{{ restaurantToDelete.name }}</i> and all items in its menu from the database.</p>
+		</div>
+	</div>
+	<form action="{{ url_for('deleteRestaurant', restaurant_id=restaurantToDelete.id) }}" method="POST">
 		<div class="row">
 			<div class="small-12 columns">
 				<div class="button-group float-right">

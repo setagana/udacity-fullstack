@@ -10,15 +10,31 @@
 			<h1>List of restaurants</h1>
 		</div>
 	</div>
+	{% for restaurant in restaurantResults%}
 	<div class="row">
 		<div class="callout clearfix">
-			<a href="{{ url_for('editRestaurant', restaurant_id=1) }}" class="button float-right float-vertical">Edit</a>
-			<h4>restaurant.name</h4>
-			<p>restaurant.address</p>
-			<p>restaurant.city</p>
-			<p>restaurant.postCode</p>
-			<p>restaurant.phone</p>
-			<p>restaurant.website
+			<div class="small-12 medium-10 columns">
+				<dl>
+					<dt><a href="{{ url_for('restaurantMenu', restaurant_id=restaurant.id) }}">{{ restaurant.name }}</a></dt>
+					<dd>{{ restaurant.address }}</dd>
+					<dd>{{ restaurant.city }}</dd>
+					<dd>{{ restaurant.postcode }}</dd>
+					<dd>{{ restaurant.phone }}</dd>
+					<dd>{{ restaurant.website }}</dd>
+				</dl>
+			</div>
+			<div class="small-12 medium-2 columns">
+				<div class="expanded button-group">
+					<a class="button" href="{{ url_for('editRestaurant', restaurant_id=restaurant.id) }}">Edit</a>
+					<a class="button" href="{{ url_for('deleteRestaurant', restaurant_id=restaurant.id) }}">Delete</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	{% endfor %}
+	<div class="row">
+		<div class="small-12 columns">
+			<a class="expanded button" href="{{ url_for('newRestaurant') }}">Add a new restaurant</a>
 		</div>
 	</div>
 	

@@ -1,41 +1,57 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Add a new menu item</title>
+	<title>Edit a menu item</title>
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='foundation.min.css' )}}" />
 	{% from "__formhelper.html" import render_field %}
 </head>
 <body>
 	<div class="row">
 		<div class="small-12 columns">
-			<h1>Edit menuItem.name</h1>
+			<h1>Edit {{ menuItem.name }}</h1>
 		</div>
 	</div>
 	<div class="row">
 		<div class="small-12 columns">
-			<form action="{{ url_for('editMenuItem', restaurant_id=restaurant_id, menu_id=menu_id) }}" method="POST">
+			<nav aria-label="You are here:" role="navigation">
+				<ul class="breadcrumbs">
+					<li><a href="{{ url_for('restaurantList') }}">All restaurants</a></li>
+					<li><a href="{{ url_for('restaurantMenu', restaurant_id=restaurant.id) }}">{{ restaurant.name}} menu</a></li>
+					<li class="disabled">Edit menu item</li>
+				</ul>
+			</nav>		
+		</div>
+	</div>
+	<form action="{{ url_for('editMenuItem', restaurant_id=restaurant.id, menu_id=menuItem.id) }}" method="POST">
+		<div class="row">
+			<div class="small-12 columns">
 				<dl>
-					{{ render_field(form.dishName, value="menuItem.dishName") }}
-					{{ render_field(form.dishDescription, value="menuItem.dishDescription") }}
+					{{ form.hidden_tag() }}
+					{{ render_field(form.dishName, value=menuItem.name) }}
+					{% if menuItem.description %}
+					{{ render_field(form.dishDescription, value=menuItem.description) }}
+					{% else %}
+					{{ render_field(form.dishDescription) }}
+					{% endif %}
 					{% if courseList %}
-					{{ render_field(form.course, aria_describedby="courseHelpText", value="menuItem.course") }}
+					{{ render_field(form.course, aria_describedby="courseHelpText", value=menuItem.course) }}
 					<p class="help-text" id="courseHelpText">This restaurant's menu currently has these courses: {{ courseList|join(", ") }}.</p>
 					{% else %}
-					{{ render_field(form.course, value="menuItem.course") }}
+					{{ render_field(form.course, value=menuItem.course) }}
 					{% endif %}
-					{{ render_field(form.price, value="menuItem.price") }}
+					{{ render_field(form.price, value=menuItem.price / 100) }}
   				</dl>
-			</form>
-		</div>
-	</div>
-	<div class="row">
-		<div class="small-12 columns">
-			<div class="button-group float-right">
-				<input type="submit" class="success button" value="Edit">
-				<a class="secondary button" href="{{ url_for('restaurantMenu', restaurant_id=restaurant_id) }}">Cancel</a>
 			</div>
 		</div>
-	</div>
+		<div class="row">
+			<div class="small-12 columns">
+				<div class="button-group float-right">
+					<input type="submit" class="success button" value="Edit">
+					<a class="secondary button" href="{{ url_for('restaurantMenu', restaurant_id=restaurant.id) }}">Cancel</a>
+				</div>
+			</div>
+		</div>
+	</form>
 
 </body>
 </html>

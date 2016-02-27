@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>restaurant.name - menu</title>
+	<title>{{ restaurant.name }} - menu</title>
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='foundation.min.css' )}}" />
 </head>
 <body>
@@ -17,11 +17,39 @@
 	</div>
 	<div class="row">
 		<div class="small-12 columns">
+			<nav aria-label="You are here:" role="navigation">
+				<ul class="breadcrumbs">
+					<li><a href="{{ url_for('restaurantList') }}">All restaurants</a></li>
+					<li class="disabled">{{ restaurant.name}} menu</li>
+				</ul>
+			</nav>		
+		</div>
+	</div>
+	<div class="row">
+		<div class="small-12 columns">
 			<div class="tabs-content" data-tabs-content="course-tabs">
 				{% for course in courseList %}
 				<div class="tabs-panel" id="panel{{ loop.index }}">
           			{% for item in menuItems[loop.index0] %}
-          			<p>{{ item }}</p>
+          			<div class="row">
+          				<div class="small-12 medium-8 columns">
+          					<dl>
+	          					<dt>{{ item.name }}</dt>
+	          					{% if item.description %}
+	          					<dd>{{ item.description }}</dd>
+	          					{% endif %}
+          					</dl>
+          				</div>
+          				<div class="small-6 medium-1 columns">
+          					<p>${{ item.price / 100 }}</p>
+          				</div>
+          				<div class="small-6 medium-3 columns">
+          					<div class="expanded button-group">
+	          					<a class="button" href="{{ url_for('editMenuItem', restaurant_id=restaurant.id, menu_id=item.id) }}">Edit</a>
+	          					<a class="button" href="{{ url_for('deleteMenuItem', restaurant_id=restaurant.id, menu_id=item.id) }}">Delete</a>
+          					</div>
+          				</div>
+          			</div>
           			{% endfor %}
         		</div>
 				{% endfor %}

@@ -1,26 +1,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Remove restaurant.name</title>
+	<title>Remove menu item</title>
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='foundation.min.css' )}}" />
 </head>
 <body>
 	<div class="row">
 		<div class="small-12 columns">
-			<h5>Are you sure you want to delete menuItem.name?</h5>
+			<h1>Remove a menu item</h1>		
 		</div>
 	</div>
 	<div class="row">
 		<div class="small-12 columns">
-			<p>Click below to remove menuItem.name and all associated data from our database.</p>
+			<nav aria-label="You are here:" role="navigation">
+				<ul class="breadcrumbs">
+					<li><a href="{{ url_for('restaurantList') }}">All restaurants</a></li>
+					<li><a href="{{ url_for('restaurantMenu', restaurant_id=restaurant.id) }}">{{ restaurant.name}} menu</a></li>
+					<li class="disabled">Delete menu item</li>
+				</ul>
+			</nav>		
 		</div>
 	</div>
-	<form action="{{ url_for('restaurantMenu', restaurant_id=restaurant_id) }}" method="POST">
+	<div class="row">
+		<div class="small-12 columns">
+			<h5>Are you sure you want to delete <i>{{ itemToDelete.name }}</i>?</h5>
+		</div>
+	</div>
+	<div class="row">
+		<div class="small-12 columns">
+			<p>Click below to remove <i>{{ itemToDelete.name }}</i> and all associated data from the database.</p>
+		</div>
+	</div>
+	<form action="{{ url_for('deleteMenuItem', restaurant_id=restaurant.id, menu_id=itemToDelete.id) }}" method="POST">
 		<div class="row">
 			<div class="small-12 columns">
 				<div class="button-group float-right">
 					<input type="submit" class="alert button" value="Delete">
-					<a class="secondary button" href="{{ url_for('restaurantMenu', restaurant_id=restaurant_id) }}">Cancel</a>
+					<a class="secondary button" href="{{ url_for('restaurantMenu', restaurant_id=restaurant.id) }}">Cancel</a>
 				</div>
 			</div>
 		</div>

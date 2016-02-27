@@ -8,13 +8,25 @@
 <body>
 	<div class="row">
 		<div class="small-12 columns">
-			<h1>Add an item to the menu of restaurant.name</h1>
+			<h1>Add an item to the menu of {{ restaurant.name }}</h1>
 		</div>
 	</div>
 	<div class="row">
 		<div class="small-12 columns">
-			<form action="{{ url_for('newMenuItem', restaurant_id=restaurant_id) }}" method="POST">
+			<nav aria-label="You are here:" role="navigation">
+				<ul class="breadcrumbs">
+					<li><a href="{{ url_for('restaurantList') }}">All restaurants</a></li>
+					<li><a href="{{ url_for('restaurantMenu', restaurant_id=restaurant.id) }}">{{ restaurant.name}} menu</a></li>
+					<li class="disabled">New menu item</li>
+				</ul>
+			</nav>		
+		</div>
+	</div>
+	<form action="{{ url_for('newMenuItem', restaurant_id=restaurant.id) }}" method="POST">
+		<div class="row">
+			<div class="small-12 columns">
 				<dl>
+					{{ form.hidden_tag() }}
 					{{ render_field(form.dishName, placeholder="Baked Alaska") }}
 					{{ render_field(form.dishDescription, placeholder="Ice cream and cake topped with a toasted meringue") }}
 					{% if courseList %}
@@ -25,17 +37,17 @@
 					{% endif %}
 					{{ render_field(form.price, placeholder="8.99") }}
   				</dl>
-			</form>
-		</div>
-	</div>
-	<div class="row">
-		<div class="small-12 columns">
-			<div class="button-group float-right">
-				<input type="submit" class="success button" value="Add">
-				<a class="secondary button" href="{{ url_for('restaurantMenu', restaurant_id=restaurant_id) }}">Cancel</a>
 			</div>
 		</div>
-	</div>
+		<div class="row">
+			<div class="small-12 columns">
+				<div class="button-group float-right">
+					<input type="submit" class="success button" value="Add">
+					<a class="secondary button" href="{{ url_for('restaurantMenu', restaurant_id=restaurant.id) }}">Cancel</a>
+				</div>
+			</div>
+		</div>
+	</form>
 
 </body>
 </html>
